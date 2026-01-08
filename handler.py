@@ -57,7 +57,9 @@ def handler(job: dict) -> dict:
     Output:
         video: Base64 encoded MP4 video
     """
-    job_input = job["input"]
+    job_input = job.get("input")
+    if not isinstance(job_input, dict):
+        return {"error": "Invalid request: missing 'input' field"}
 
     # Validate required inputs
     if "image_base64" not in job_input:
