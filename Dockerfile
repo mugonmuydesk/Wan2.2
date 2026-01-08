@@ -24,12 +24,13 @@ WORKDIR /app
 RUN git clone https://github.com/Wan-Video/Wan2.2.git . && \
     git checkout main
 
-# Install Python dependencies
+# Install Python dependencies (flash_attn needs torch first, so install separately)
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt && \
+    grep -v flash_attn requirements.txt > requirements_no_flash.txt && \
+    pip install --no-cache-dir -r requirements_no_flash.txt && \
     pip install --no-cache-dir runpod huggingface_hub[cli]
 
-# Install Flash Attention 2 for performance
+# Install Flash Attention 2 (requires torch to be installed first)
 RUN pip install --no-cache-dir flash-attn --no-build-isolation
 
 # Create model directory
