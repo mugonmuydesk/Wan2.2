@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "basic_s2v_generation",
+      "input": {
+        "image_base64": "TEST_IMAGE_BASE64_HERE",
+        "audio_base64": "TEST_AUDIO_BASE64_HERE",
+        "prompt": "a person talking naturally",
+        "size": "480*832",
+        "steps": 10,
+        "seed": 42
+      },
+      "timeout": 600000
+    }
+  ],
+  "config": {
+    "gpuTypeId": "NVIDIA H100 80GB HBM3",
+    "gpuCount": 1,
+    "env": [
+      {
+        "key": "MODEL_DIR",
+        "value": "/models/Wan2.2-S2V-14B"
+      },
+      {
+        "key": "OFFLOAD_MODEL",
+        "value": "True"
+      }
+    ],
+    "allowedCudaVersions": ["12.4", "12.3", "12.2", "12.1", "12.0"]
+  }
+}
