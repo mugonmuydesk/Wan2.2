@@ -1,7 +1,7 @@
 # Dockerfile for Wan2.2-S2V-14B on RunPod Serverless
 # Requires 80GB+ VRAM (H100, A100-80GB)
 
-FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn9-devel
+FROM pytorch/pytorch:2.2.0-cuda12.1-cudnn8-devel
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
