@@ -30,8 +30,10 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements_no_flash.txt && \
     pip install --no-cache-dir runpod huggingface_hub[cli]
 
-# Install Flash Attention 2 (requires torch to be installed first)
-RUN pip install --no-cache-dir flash-attn --no-build-isolation
+# Install Flash Attention 2 (use pre-built wheel to avoid 2+ hour build time)
+# Wheel from: https://github.com/mjun0812/flash-attention-prebuild-wheels
+ARG FLASH_ATTN_WHEEL=https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.0.4/flash_attn-2.7.3%2Bcu121torch2.2-cp310-cp310-linux_x86_64.whl
+RUN pip install --no-cache-dir ${FLASH_ATTN_WHEEL}
 
 # Create model directory
 RUN mkdir -p /models
